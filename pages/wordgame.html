@@ -30,10 +30,37 @@
 
   <h1>Word Game</h1>
   <p>This is where the word game will go</p>
+  <div id="app">
+  <star-rating v-bind:increment="0.5"
+               v-bind:show-rating = false
+               inactive-color="#000"
+               active-color="#F00"
+               @rating-selected ="setRating">
 
+  </star-rating>
+  <h3>Average Ratings: {{averageRatings}}</h3>
+    <h3>Add a Comment</h3>
+     <form v-on:submit.prevent="addComment">
+       <input v-model="addedName" placeholder="Name"></p>
+       <textarea v-model="addedComment"></textarea>
+       <br />
+       <button type="submit">Comment</button>
+     </form>
+     <h3>Comments</h3>
+     <div v-for="comment in comments[gameID]">
+       <hr>
+       <p>{{comment.text}}</p>
+       <p><i>-- {{comment.author}} ({{comment.time}})</i></p>
+     </div>
+   </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.2/dist/vue.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudfblare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <!-- <script src="https://cdnjs.cloudfblare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script> -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/vue-star-rating/dist/star-rating.min.js"></script>
+  <script src="https://momentjs.com/downloads/moment.min.js"></script>
+  <script src="/scripts/wordgame.js"></script>
 </body>
 
 <footer class="footerClass">
