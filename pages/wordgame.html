@@ -29,30 +29,46 @@
    </nav>
 
   <h1>Word Game</h1>
-  <p>This is where the word game will go</p>
-  <div id="app">
-  <star-rating v-bind:increment="0.5"
-               v-bind:show-rating = false
-               inactive-color="#000"
-               active-color="#F00"
-               @rating-selected ="setRating">
+  <p>In this game you enter a word as your starting point. After that, enter
+     another word within one edit-distance of the previous. The cycle continues
+     until you fail to be within one edit-distance. For now the game doesn't check
+    if you already entered that word, nor does it check if it's actually a word.</p>
 
-  </star-rating>
-  <h3>Average Ratings: {{averageRatings}}</h3>
-    <h3>Add a Comment</h3>
-     <form v-on:submit.prevent="addComment">
-       <input v-model="addedName" placeholder="Name"></p>
-       <textarea v-model="addedComment"></textarea>
-       <br />
-       <button type="submit">Comment</button>
-     </form>
-     <h3>Comments</h3>
-     <div v-for="comment in comments[gameID]">
-       <hr>
-       <p>{{comment.text}}</p>
-       <p><i>-- {{comment.author}} ({{comment.time}})</i></p>
-     </div>
+    <div id="app">
+      <div id="game">
+        <form v-on:submit.prevent="addWord">
+          <input type="text" v-model="word">
+          <button type="submit">Add</button>
+        </form>
+            <label v-for="word in allWords" v-bind:class="word">{{ word }} &nbsp;</label>
+      </div>
+      <div id="reviews">
+        <star-rating
+
+                 v-bind:inline = true
+                 v-bind:increment="0.5"
+                 v-bind:show-rating = false
+                 inactive-color="#000"
+                 active-color="#F00"
+                 @rating-selected ="setRating"
+                 >
+        </star-rating>
+        <h3>Average Ratings: {{averageRatings}}</h3>
+          <h3>Add a Comment</h3>
+           <form v-on:submit.prevent="addComment">
+             <input v-model="addedName" placeholder="Name"></p>
+             <textarea v-model="addedComment"></textarea>
+             <br />
+             <button type="submit">Comment</button>
+           </form>
+           <h3>Comments</h3>
+       <div v-for="comment in comments[gameID]">
+         <hr>
+         <p>{{comment.text}}</p>
+         <p><i>-- {{comment.author}} ({{comment.time}})</i></p>
+       </div>
    </div>
+ </div>
 
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.2/dist/vue.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -64,7 +80,7 @@
 </body>
 
 <footer class="footerClass">
-	<a href="https://github.com/BYU-CS-260-Winter-2019/lab-1-CalCello">Github</a>
+	<a href="https://github.com/CalCello/CreativeProject">Github</a>
 </footer>
 
 </html>
